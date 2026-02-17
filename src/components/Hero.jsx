@@ -19,30 +19,11 @@ const Hero = () => {
 
         <div className="hero-name">
           <div className="hero-name-line">
-            <span className="hero-letter">M</span>
-            <span className="hero-letter">U</span>
-            <span className="hero-letter">H</span>
-            <span className="hero-letter">A</span>
-            <span className="hero-letter">M</span>
-            <span className="hero-letter">M</span>
-            <span className="hero-letter">A</span>
-            <span className="hero-letter">D</span>
-            <span className="hero-letter space">&nbsp;</span>
-            <span className="hero-letter">A</span>
-            <span className="hero-letter">F</span>
-            <span className="hero-letter">Z</span>
-            <span className="hero-letter">A</span>
-            <span className="hero-letter">A</span>
-            <span className="hero-letter">L</span>
+            <span className="hero-word">MUHAMMAD</span>
+            <span className="hero-word">AFZAAL</span>
           </div>
           <div className="hero-name-line accent-line">
-            <span className="hero-letter accent">R</span>
-            <span className="hero-letter accent">A</span>
-            <span className="hero-letter accent">S</span>
-            <span className="hero-letter accent">H</span>
-            <span className="hero-letter accent">E</span>
-            <span className="hero-letter accent">E</span>
-            <span className="hero-letter accent">D</span>
+            <span className="hero-word accent">RASHEED</span>
           </div>
         </div>
 

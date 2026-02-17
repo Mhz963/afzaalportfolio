@@ -50,22 +50,20 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 0.3em;
 }
 
-.hero-letter {
+.hero-word {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 1.1;
   color: var(--text-primary);
   display: inline-block;
+  white-space: nowrap;
 }
 
-.hero-letter.space {
-  width: 0.3em;
-}
-
-.hero-letter.accent {
+.hero-word.accent {
   background: var(--gradient-1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
