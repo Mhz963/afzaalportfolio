@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaPlay, FaEnvelope } from 'react-icons/fa';
+import { FaPlay, FaEnvelope, FaFolderOpen } from 'react-icons/fa';
 import { HiDownload } from 'react-icons/hi';
 import './Hero.css';
 
@@ -57,9 +57,9 @@ const Hero = () => {
             <FaEnvelope />
             Get In Touch
           </a>
-          <a href="#experience" className="btn-outline hoverable">
-            <HiDownload />
-            View My Work
+          <a href="https://drive.google.com/drive/folders/1kCnoBJgzff7OOBS1AkPzMJJ4yBMNi3aB?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn-outline hoverable">
+            <FaFolderOpen />
+            View My Portfolio
           </a>
         </div>
 

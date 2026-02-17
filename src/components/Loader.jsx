@@ -19,6 +19,7 @@ const Loader = () => {
           >
             <span className="loader-letter">M</span>
             <span className="loader-letter-accent">A</span>
+            <span className="loader-letter">R</span>
           </motion.div>
           <motion.div
             className="loader-bar-container"

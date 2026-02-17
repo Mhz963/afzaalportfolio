@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Experience', href: '#experience' },
   { name: 'Skills', href: '#skills' },
   { name: 'Contact', href: '#contact' },
+  { name: 'Portfolio', href: 'https://drive.google.com/drive/folders/1kCnoBJgzff7OOBS1AkPzMJJ4yBMNi3aB?usp=sharing', external: true },
 ];
 
 const Navbar = () => {
@@ -57,21 +58,34 @@ const Navbar = () => {
         <a href="#home" className="navbar-logo hoverable" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}>
           <span className="logo-text">M</span>
           <span className="logo-accent">A</span>
+          <span className="logo-text">R</span>
         </a>
 
         <div className="navbar-links">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`nav-link hoverable ${activeSection === link.href.slice(1) ? 'active' : ''}`}
-              onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-            >
-              {link.name}
-              {activeSection === link.href.slice(1) && (
-                <motion.div className="nav-active-dot" layoutId="navDot" />
-              )}
-            </a>
+            link.external ? (
+              <a
+                key={link.name}
+                href={link.href}
+                className="nav-link hoverable"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`nav-link hoverable ${activeSection === link.href.slice(1) ? 'active' : ''}`}
+                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+              >
+                {link.name}
+                {activeSection === link.href.slice(1) && (
+                  <motion.div className="nav-active-dot" layoutId="navDot" />
+                )}
+              </a>
+            )
           ))}
         </div>
 
@@ -102,17 +116,32 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           >
             {navLinks.map((link, i) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                className={`mobile-link ${activeSection === link.href.slice(1) ? 'active' : ''}`}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
-              >
-                {link.name}
-              </motion.a>
+              link.external ? (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  className="mobile-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  {link.name}
+                </motion.a>
+              ) : (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  className={`mobile-link ${activeSection === link.href.slice(1) ? 'active' : ''}`}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  {link.name}
+                </motion.a>
+              )
             ))}
             <motion.a
               href="#contact"
