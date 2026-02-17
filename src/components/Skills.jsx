@@ -1,156 +1,155 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import {
   SiAdobepremierepro,
   SiAdobephotoshop,
   SiAdobeaftereffects,
   SiCanva,
-} from "react-icons/si";
-import { FaCut, FaFilm } from "react-icons/fa";
-import "./Skills.css";
+} from 'react-icons/si';
+import { FaCut, FaFilm } from 'react-icons/fa';
+import './Skills.css';
 
 const skills = [
   {
-    name: "Adobe Premiere Pro",
+    name: 'Adobe Premiere Pro',
     icon: <SiAdobepremierepro />,
     level: 95,
-    color: "#9999FF",
-    category: "Video Editing",
+    color: '#9999FF',
+    category: 'Video Editing',
   },
   {
-    name: "Adobe After Effects",
+    name: 'Adobe After Effects',
     icon: <SiAdobeaftereffects />,
-    level: 88,
-    color: "#CF96FD",
-    category: "Motion Graphics",
+    level: 85,
+    color: '#CF96FD',
+    category: 'Motion Graphics',
   },
   {
-    name: "Adobe Photoshop",
+    name: 'Adobe Photoshop',
     icon: <SiAdobephotoshop />,
     level: 90,
-    color: "#31A8FF",
-    category: "Graphic Design",
+    color: '#31A8FF',
+    category: 'Graphic Design',
   },
   {
-    name: "CapCut",
+    name: 'CapCut',
     icon: <FaCut />,
     level: 92,
-    color: "#00d4ff",
-    category: "Video Editing",
+    color: '#00F0B5',
+    category: 'Video Editing',
   },
   {
-    name: "Filmora",
+    name: 'Filmora',
     icon: <FaFilm />,
-    level: 85,
-    color: "#7b2ff7",
-    category: "Video Editing",
+    level: 88,
+    color: '#00D4AA',
+    category: 'Video Editing',
   },
   {
-    name: "Canva",
+    name: 'Canva',
     icon: <SiCanva />,
-    level: 88,
-    color: "#00C4CC",
-    category: "Graphic Design",
+    level: 85,
+    color: '#00C4CC',
+    category: 'Graphic Design',
   },
 ];
 
+const additionalSkills = [
+  'Color Grading',
+  'Motion Graphics',
+  'Thumbnail Design',
+  'Social Media Content',
+  'YouTube Optimization',
+  'Storyboarding',
+  'Sound Design',
+  'Video Transitions',
+  'Brand Identity',
+  'Short-form Content',
+  'Wedding Videography',
+  'Commercial Ads',
+];
+
 const Skills = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="skills" className="section skills-section" ref={ref}>
-      <div className="container">
+    <section id="skills" className="section skills">
+      <div className="glow-blob glow-purple" style={{ width: 300, height: 300, bottom: '10%', right: '-5%' }} />
+      <div className="glow-blob glow-blue" style={{ width: 250, height: 250, top: '15%', left: '-5%' }} />
+
+      <div className="section-container" ref={ref}>
         <motion.div
+          className="section-header"
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
         >
-          <h2 className="section-title">Skills & Tools</h2>
-          <div className="glow-line" />
-          <p className="section-subtitle">
-            Industry-standard tools I use to bring ideas to life
-          </p>
+          <span className="section-subtitle">What I Use</span>
+          <h2 className="section-title">Tools & Skills</h2>
+          <div className="section-line" />
         </motion.div>
 
+        {/* Main Skills Grid */}
         <div className="skills-grid">
-          {skills.map((skill, index) => (
+          {skills.map((skill, i) => (
             <motion.div
-              key={skill.name}
-              className="skill-card"
+              key={i}
+              className="skill-card hoverable"
               initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.03 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
             >
               <div className="skill-card-top">
-                <div
-                  className="skill-icon"
-                  style={{
-                    background: `${skill.color}15`,
-                    color: skill.color,
-                  }}
-                >
+                <div className="skill-icon" style={{ color: skill.color, background: `${skill.color}15` }}>
                   {skill.icon}
                 </div>
                 <span className="skill-category">{skill.category}</span>
               </div>
-
-              <h3 className="skill-name">{skill.name}</h3>
-
-              <div className="skill-bar-wrapper">
-                <div className="skill-bar-bg">
-                  <motion.div
-                    className="skill-bar-fill"
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: `${skill.level}%` } : {}}
-                    transition={{ duration: 1.2, delay: 0.3 + index * 0.15, ease: "easeOut" }}
-                    style={{
-                      background: `linear-gradient(90deg, ${skill.color}, ${skill.color}aa)`,
-                      boxShadow: `0 0 12px ${skill.color}40`,
-                    }}
-                  />
-                </div>
-                <span className="skill-percent" style={{ color: skill.color }}>
+              <h4 className="skill-name">{skill.name}</h4>
+              <div className="skill-bar-container">
+                <motion.div
+                  className="skill-bar"
+                  style={{ background: `linear-gradient(90deg, ${skill.color}, ${skill.color}88)` }}
+                  initial={{ width: 0 }}
+                  animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
+                  transition={{ duration: 1.2, delay: 0.5 + i * 0.1, ease: 'easeOut' }}
+                />
+              </div>
+              <div className="skill-bar-info">
+                <span className="skill-level-text">Proficiency</span>
+                <motion.span
+                  className="skill-percentage"
+                  style={{ color: skill.color }}
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : {}}
+                  transition={{ delay: 1 + i * 0.1 }}
+                >
                   {skill.level}%
-                </span>
+                </motion.span>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Additional Skills tags */}
+        {/* Additional Skills */}
         <motion.div
           className="additional-skills"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.8 }}
         >
-          <h3 className="additional-title">Also Skilled In</h3>
-          <div className="skill-tags">
-            {[
-              "Color Grading",
-              "Sound Design",
-              "Storyboarding",
-              "Thumbnails",
-              "Social Media Content",
-              "Wedding Videos",
-              "Corporate Videos",
-              "YouTube Shorts",
-              "Reels & TikTok",
-              "Brand Design",
-              "Logo Design",
-              "Animated Explainers",
-            ].map((tag, i) => (
+          <h3 className="additional-title">Additional Expertise</h3>
+          <div className="tags-container">
+            {additionalSkills.map((skill, i) => (
               <motion.span
-                key={tag}
-                className="skill-tag"
+                key={i}
+                className="skill-tag hoverable"
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.3, delay: 1 + i * 0.05 }}
-                whileHover={{ scale: 1.1 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 1 + i * 0.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
               >
-                {tag}
+                {skill}
               </motion.span>
             ))}
           </div>

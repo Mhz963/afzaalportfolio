@@ -1,4 +1,4 @@
-/* ===== GLOBAL RESET & BASE STYLES ===== */
+/* ===== CSS RESET & GLOBAL STYLES ===== */
 *,
 *::before,
 *::after {
@@ -8,22 +8,22 @@
 }
 
 :root {
-  --primary: #00d4ff;
-  --primary-dark: #0099cc;
-  --accent: #7b2ff7;
-  --accent-light: #a855f7;
-  --bg-dark: #0a0a0f;
-  --bg-section: #0f0f1a;
-  --bg-card: #161625;
-  --text-primary: #ffffff;
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-card: #16161f;
+  --bg-card-hover: #1e1e2a;
+  --accent: #a855f7;
+  --accent-light: #c084fc;
+  --accent-dark: #7c3aed;
+  --accent-glow: rgba(168, 85, 247, 0.3);
+  --text-primary: #f1f1f6;
   --text-secondary: #a0a0b8;
   --text-muted: #6b6b80;
-  --gradient-primary: linear-gradient(135deg, #00d4ff, #7b2ff7);
-  --gradient-accent: linear-gradient(135deg, #7b2ff7, #ff6b6b);
-  --gradient-hero: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a0a0f 100%);
-  --border-color: rgba(255, 255, 255, 0.06);
-  --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.15);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gradient-1: linear-gradient(135deg, #a855f7, #ec4899);
+  --gradient-2: linear-gradient(135deg, #7c3aed, #a855f7);
+  --gradient-3: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  --border-color: rgba(168, 85, 247, 0.15);
+  --shadow-glow: 0 0 30px rgba(168, 85, 247, 0.15);
   --font-primary: 'Poppins', sans-serif;
   --font-display: 'Playfair Display', serif;
 }
@@ -35,7 +35,7 @@ html {
 
 body {
   font-family: var(--font-primary);
-  background: var(--bg-dark);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
   line-height: 1.7;
@@ -57,66 +57,33 @@ img {
   display: block;
 }
 
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 10px;
+  background: var(--accent-dark);
+  border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  background: var(--accent);
 }
 
 /* ===== SELECTION ===== */
 ::selection {
   background: var(--accent);
-  color: #fff;
-}
-
-/* ===== UTILITY ===== */
-.section {
-  padding: 100px 0;
-  position: relative;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 16px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.section-subtitle {
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  margin-bottom: 60px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ===== GLOW LINE SEPARATOR ===== */
-.glow-line {
-  width: 80px;
-  height: 4px;
-  background: var(--gradient-primary);
-  border-radius: 4px;
-  margin: 0 auto 24px;
+  color: white;
 }

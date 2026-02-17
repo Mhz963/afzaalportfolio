@@ -1,51 +1,61 @@
-import { motion } from "framer-motion";
-import { FaHeart, FaArrowUp } from "react-icons/fa";
-import "./Footer.css";
+import { motion } from 'framer-motion';
+import { FaHeart, FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
+import './Footer.css';
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer">
-      <div className="container footer-container">
+      <div className="footer-container">
         <div className="footer-top">
-          <a href="#home" className="footer-logo">
-            <span className="logo-text">MA</span>
-            <span className="logo-dot">.</span>
-          </a>
-          <p className="footer-tagline">
-            Crafting Visual Stories That Inspire
-          </p>
+          <div className="footer-brand">
+            <a href="#home" className="footer-logo hoverable">
+              <span className="logo-text">M</span>
+              <span className="logo-accent">A</span>
+            </a>
+            <p className="footer-tagline">
+              Crafting visual stories that leave a lasting impression.
+            </p>
+          </div>
+
+          <div className="footer-links-section">
+            <h4>Quick Links</h4>
+            <div className="footer-links">
+              <a href="#home" className="hoverable">Home</a>
+              <a href="#about" className="hoverable">About</a>
+              <a href="#experience" className="hoverable">Experience</a>
+              <a href="#skills" className="hoverable">Skills</a>
+              <a href="#contact" className="hoverable">Contact</a>
+            </div>
+          </div>
+
+          <div className="footer-contact-section">
+            <h4>Contact</h4>
+            <div className="footer-contact-links">
+              <a href="mailto:muhammadafzaalr@gmail.com" className="hoverable">
+                <FaEnvelope /> muhammadafzaalr@gmail.com
+              </a>
+              <a href="tel:+923075252169" className="hoverable">
+                <FaPhone /> +92 307 525 2169
+              </a>
+              <a href="https://wa.me/923075252169" target="_blank" rel="noopener noreferrer" className="hoverable">
+                <FaWhatsapp /> WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div className="footer-links">
-          {["Home", "About", "Experience", "Skills", "Contact"].map(
-            (link) => (
-              <a key={link} href={`#${link.toLowerCase()}`} className="footer-link">
-                {link}
-              </a>
-            )
-          )}
-        </div>
+        <div className="footer-divider" />
 
         <div className="footer-bottom">
-          <p className="footer-copy">
-            © {new Date().getFullYear()} Muhammad Afzaal Rasheed. Made with{" "}
-            <FaHeart className="heart-icon" /> All rights reserved.
+          <p>
+            © {currentYear} Muhammad Afzaal Rasheed. All rights reserved.
+          </p>
+          <p className="footer-credit">
+            Made with <FaHeart className="heart-icon" /> by Afzaal
           </p>
         </div>
-
-        <motion.button
-          className="scroll-to-top"
-          onClick={scrollToTop}
-          whileHover={{ scale: 1.1, y: -4 }}
-          whileTap={{ scale: 0.9 }}
-          aria-label="Scroll to top"
-        >
-          <FaArrowUp />
-        </motion.button>
       </div>
     </footer>
   );

@@ -1,110 +1,129 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
-import "./Navbar.css";
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import './Navbar.css';
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      // Determine active section
+      const sections = navLinks.map(l => l.href.slice(1));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 150) {
+            setActiveSection(sections[i]);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+  const handleNavClick = (href) => {
+    setMobileOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [mobileOpen]);
+  };
 
   return (
     <motion.nav
-      className={`navbar ${scrolled ? "scrolled" : ""}`}
+      className={`navbar ${scrolled ? 'scrolled' : ''}`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <div className="navbar-container">
-        <a href="#home" className="navbar-logo">
-          <span className="logo-text">MA</span>
-          <span className="logo-dot">.</span>
+        <a href="#home" className="navbar-logo hoverable" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}>
+          <span className="logo-text">M</span>
+          <span className="logo-accent">A</span>
         </a>
 
-        <ul className="navbar-links">
-          {navLinks.map((link, i) => (
-            <motion.li
+        <div className="navbar-links">
+          {navLinks.map((link) => (
+            <a
               key={link.name}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * i, duration: 0.4 }}
+              href={link.href}
+              className={`nav-link hoverable ${activeSection === link.href.slice(1) ? 'active' : ''}`}
+              onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
             >
-              <a href={link.href} className="nav-link">
-                {link.name}
-              </a>
-            </motion.li>
+              {link.name}
+              {activeSection === link.href.slice(1) && (
+                <motion.div className="nav-active-dot" layoutId="navDot" />
+              )}
+            </a>
           ))}
-        </ul>
+        </div>
 
-        <a href="#contact" className="navbar-cta">
-          Hire Me
+        <a
+          href="#contact"
+          className="navbar-cta hoverable"
+          onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+        >
+          Let's Talk
         </a>
 
         <button
-          className="mobile-toggle"
+          className="mobile-toggle hoverable"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle navigation"
+          aria-label="Toggle menu"
         >
           {mobileOpen ? <HiX /> : <HiMenuAlt3 />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             className="mobile-menu"
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            <ul className="mobile-links">
-              {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.name}
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 * i }}
-                >
-                  <a
-                    href={link.href}
-                    className="mobile-link"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-            <a
+            {navLinks.map((link, i) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                className={`mobile-link ${activeSection === link.href.slice(1) ? 'active' : ''}`}
+                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+            <motion.a
               href="#contact"
               className="mobile-cta"
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: navLinks.length * 0.1 }}
             >
-              Hire Me
-            </a>
+              Let's Talk
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
